@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Cell from "./components/Cell";
+import "./CellManager";
+import CellManager from "./CellManager";
+import styles from "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.cellManager = new CellManager();
+  }
+
+  render() {
+    const cells = this.cellManager
+      .getCells()
+      .map((cell) => <Cell key={cell.id} number={cell.number}></Cell>);
+    return <div className={styles.container}>{cells}</div>;
+  }
 }
 
 export default App;
